@@ -1,5 +1,8 @@
 import pytest
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'path_to_classes_directory')))
 from classes.many_to_many import Article
 from classes.many_to_many import Magazine
 from classes.many_to_many import Author
@@ -23,6 +26,11 @@ class TestArticle:
         author = Author("Carry Bradshaw")
         magazine = Magazine("Vogue", "Fashion")
         article_1 = Article(author, magazine, "How to wear a tutu with style")
+    
+        # Ensure that setting the title after initialization raises an AttributeError
+        with self.assertRaises(AttributeError):
+            article_1.title = 500
+
 
         # comment out the next two lines if using Exceptions
         article_1.title = 500
